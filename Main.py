@@ -699,8 +699,9 @@ L8014_Communication.creer_classe('BTS1_COM', 21.3)
 L8014_Communication.creer_classe('BTS2_COM', 21.3)
 # endregion
 
-# J = Prof('Jean', 10)
-# L0426_Espagnol.Classes['2GT1'].assigner_prof(J, 2)
+
 # print(L0426_Espagnol.Classes['2GT1'].assignments)
 # print(L0426_Espagnol.Classes['2GT1'].heures_attribues)
 # print(L0426_Espagnol.Classes['2GT1'].heures_totales)
+
+print(L1600_SVT.Profs)
