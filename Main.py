@@ -63,10 +63,12 @@ class Matiere:
         self.Profs.append(p)
 
 
+Matieres = []
 
 # region L0100_Philosophie
 
 L0100_Philosophie = Matiere('L0100_Philosophie', 60)
+Matieres.append(L0100_Philosophie)
 
 L0100_Philosophie.creer_prof('M. BEDMINSTER', 9)
 L0100_Philosophie.creer_prof('Mme CHASTANG', 18)
@@ -94,6 +96,7 @@ L0100_Philosophie.creer_classe('AL2', 6)
 # region L0201_Lett_Class
 
 L0201_Lett_Class = Matiere('L0201_Lett_Class', 35)
+Matieres.append(L0201_Lett_Class)
 
 L0201_Lett_Class.creer_prof('Mme ELAJME', 9)
 L0201_Lett_Class.creer_prof('Mme OTVAS', 5)
@@ -109,6 +112,7 @@ L0201_Lett_Class.creer_classe('AL2', 12)
 # region L0202_Lett_Mod
 
 L0202_Lett_Mod = Matiere('L0202_Lett_Mod', 190.2)
+Matieres.append(L0202_Lett_Mod)
 
 L0202_Lett_Mod.creer_prof('Mme BALTZER', 16.2)
 L0202_Lett_Mod.creer_prof('Mme MENDER', 6)
@@ -170,6 +174,7 @@ L0202_Lett_Mod.creer_classe('AL2', 5)
 # region L0421_Allemand
 
 L0421_Allemand = Matiere('L0421_Allemand', 2)
+Matieres.append(L0421_Allemand)
 
 L0421_Allemand.creer_prof('BMP ALLEMAND', 2)
 
@@ -178,6 +183,7 @@ L0421_Allemand.creer_classe('1eGT9', 2)
 # region L0422_Anglais
 
 L0422_Anglais = Matiere('L0422_Anglais', 195)
+Matieres.append(L0422_Anglais)
 
 L0422_Anglais.creer_prof('Mme BERTILLE', 18)
 L0422_Anglais.creer_prof('Mme COLLETIN', 6)
@@ -246,6 +252,7 @@ L0422_Anglais.creer_classe('AL2', 6)
 # region L0426_Espagnol
 
 L0426_Espagnol = Matiere('L0426_Espagnol', 135)
+Matieres.append(L0426_Espagnol)
 
 L0426_Espagnol.creer_prof('M. PLAISANT', 18)
 L0426_Espagnol.creer_prof('M. CORDINA', 9)
@@ -308,6 +315,7 @@ L0426_Espagnol.creer_classe('AL2', 7)
 # region L0449_Creole
 
 L0449_Creole = Matiere('L0449_Creole', 6)
+Matieres.append(L0449_Creole)
 
 L0449_Creole.creer_prof('BMP CREOLE', 6)
 
@@ -318,6 +326,7 @@ L0449_Creole.creer_classe('1ere_Autres', 3)
 # region L0433_Portugais
 
 L0433_Portugais = Matiere('L0433_Portugais', 6)
+Matieres.append(L0433_Portugais)
 
 L0433_Portugais.creer_prof('BMP PORTUGAIS', 6)
 
@@ -328,6 +337,7 @@ L0433_Portugais.creer_classe('1ere_Autres', 3)
 # region L1000_Hit_Geo
 
 L1000_Hit_Geo = Matiere('L1000_Hit_Geo', 186.4)
+Matieres.append(L1000_Hit_Geo)
 
 L1000_Hit_Geo.creer_prof('Mme CONTINANT', 18)
 L1000_Hit_Geo.creer_prof('M. DELATRE', 9)
@@ -387,6 +397,7 @@ L1000_Hit_Geo.creer_classe('AL2', 13)
 # region L1100_Sc_Eco_Soc
 
 L1100_Sc_Eco_Soc = Matiere('L1100_Sc_Eco_Soc', 44.4)
+Matieres.append(L1100_Sc_Eco_Soc)
 
 L1100_Sc_Eco_Soc.creer_prof('M. LORRAIN', 9)
 L1100_Sc_Eco_Soc.creer_prof('M. PIERRE ANTOINE', 14.4)
@@ -412,6 +423,7 @@ L1100_Sc_Eco_Soc.creer_classe('ECG2', 8)
 # region L1300_Math
 
 L1300_Math = Matiere('L1300_Math', 188)
+Matieres.append(L1300_Math)
 
 L1300_Math.creer_prof('M. ARMAND', 15)
 L1300_Math.creer_prof('Mme BORDIN', 18)
@@ -452,7 +464,9 @@ L1300_Math.creer_classe('ECG1', 11)
 L1300_Math.creer_classe('ECG2', 9)
 # endregion
 # region L1500_Phys_Chim
+
 L1500_Phys_Chim = Matiere('L1500_Phys_Chim', 122)
+Matieres.append(L1500_Phys_Chim)
 
 L1500_Phys_Chim.creer_prof('M. BARON', 15)
 L1500_Phys_Chim.creer_prof('Mme BURG', 18)
@@ -501,6 +515,7 @@ L1500_Phys_Chim.creer_classe('TST2S', 4)
 # region NSI
 
 NSI = Matiere('NSI', 10)
+Matieres.append(NSI)
 
 NSI.creer_prof('M. DANCHET', 10)
 NSI.creer_prof('M. TRAVERS', 0)
@@ -511,6 +526,7 @@ NSI.creer_classe('Term_Spécialités', 6)
 # region L1600_SVT
 
 L1600_SVT = Matiere('L1600_SVT', 90)
+Matieres.append(L1600_SVT)
 
 L1600_SVT.creer_prof('Mme MONPIERRE', 18)
 L1600_SVT.creer_prof('Mme ETIENNE', 18)
@@ -552,6 +568,7 @@ L1600_SVT.creer_classe('Term_Spécialités', 22)
 # region L1800_Arts_Plastiques
 
 L1800_Arts_Plastiques = Matiere('L1800_Arts_Plastiques', 18)
+Matieres.append(L1800_Arts_Plastiques)
 
 L1800_Arts_Plastiques.creer_prof('M. GORIN', 15)
 L1800_Arts_Plastiques.creer_prof('Mme PARRA', 3)
@@ -566,6 +583,7 @@ L1800_Arts_Plastiques.creer_classe('Term_Autres', 3)
 # region L1900_Eps
 
 L1900_Eps = Matiere('L1900_Eps', 103)
+Matieres.append(L1900_Eps)
 
 L1900_Eps.creer_prof('Mme EBRING', 20)
 L1900_Eps.creer_prof('M. LAROCHELLE', 20)
@@ -619,6 +637,7 @@ L1900_Eps.creer_classe('AL2', 2)
 # region L6500_Ens_Arts_et_Arts_App
 
 L6500_Ens_Arts_et_Arts_App = Matiere('L6500_Ens_Arts_et_Arts_App', 10)
+Matieres.append(L6500_Ens_Arts_et_Arts_App)
 
 L6500_Ens_Arts_et_Arts_App.creer_prof('BMP ENS ART', 10)
 
@@ -628,6 +647,7 @@ L6500_Ens_Arts_et_Arts_App.creer_classe('BTS2_COM', 5)
 # region L7100_Bioc_Genie_Biol
 
 L7100_Bioc_Genie_Biol = Matiere('L7100_Bioc_Genie_Biol', 15.75)
+Matieres.append(L7100_Bioc_Genie_Biol)
 
 L7100_Bioc_Genie_Biol.creer_prof('M. STRAZEL', 15.75)
 
@@ -638,6 +658,7 @@ L7100_Bioc_Genie_Biol.creer_classe('TST2S', 8)
 # region L7300_SC_et_Tech_Medico
 
 L7300_SC_et_Tech_Medico = Matiere('L7300_SC_et_Tech_Medico', 25.5)
+Matieres.append(L7300_SC_et_Tech_Medico)
 
 L7300_SC_et_Tech_Medico.creer_prof('Mme SAINT MAXIMIN', 18)
 L7300_SC_et_Tech_Medico.creer_prof('BMP STMS', 7.5)
@@ -649,6 +670,7 @@ L7300_SC_et_Tech_Medico.creer_classe('TST2S', 13)
 # region L8011_Eco_Gest_AD_Grh
 
 L8011_Eco_Gest_AD_Grh = Matiere('L8011_Eco_Gest_AD_Grh', 105)
+Matieres.append(L8011_Eco_Gest_AD_Grh)
 
 L8011_Eco_Gest_AD_Grh.creer_prof('Mme CURIER', 18)
 L8011_Eco_Gest_AD_Grh.creer_prof('Mme DAKOURE', 18)
@@ -665,6 +687,7 @@ L8011_Eco_Gest_AD_Grh.creer_classe('BTS2_SAM', 54.38)
 # region L8012_Eco_Gest_Comp_Fin
 
 L8012_Eco_Gest_Comp_Fin = Matiere('L8012_Eco_Gest_Comp_Fin', 72)
+Matieres.append(L8012_Eco_Gest_Comp_Fin)
 
 L8012_Eco_Gest_Comp_Fin.creer_prof('Mme BABEL', 18)
 L8012_Eco_Gest_Comp_Fin.creer_prof('M. COINTRE', 18)
@@ -679,6 +702,7 @@ L8012_Eco_Gest_Comp_Fin.creer_classe('BTS2_SAM', 38.75)
 # region L8013_Eco_Gest_Cm
 
 L8013_Eco_Gest_Cm = Matiere('L8013_Eco_Gest_Cm', 51)
+Matieres.append(L8013_Eco_Gest_Cm)
 
 L8013_Eco_Gest_Cm.creer_prof('Mme CONDO', 18)
 L8013_Eco_Gest_Cm.creer_prof('Mme MARY', 15)
@@ -691,6 +715,7 @@ L8013_Eco_Gest_Cm.creer_classe('BTS2_MCO', 35)
 # region L8014_Communication
 
 L8014_Communication = Matiere('L8014_Communication', 30)
+Matieres.append(L8014_Communication)
 
 L8014_Communication.creer_prof('M. BOISDUR', 15)
 L8014_Communication.creer_prof('Mme RENAUDIN', 15)
@@ -704,4 +729,4 @@ L8014_Communication.creer_classe('BTS2_COM', 21.3)
 # print(L0426_Espagnol.Classes['2GT1'].heures_attribues)
 # print(L0426_Espagnol.Classes['2GT1'].heures_totales)
 
-print(L1600_SVT.Profs)
+print(Matieres)
