@@ -1,4 +1,5 @@
 import pandas as pd
+import os.path
 
 # region CONST
 # classes
@@ -58,14 +59,60 @@ def assign_hour(_subject, classe, prof, hours):
     profs_df.at[prof, 'Assigned_Hours'] += hours
 
 
+def save_to_csv(_data, _filename):
+    _data.to_csv(_filename, index=True)
+
+
+def load_from_csv(_filename):
+    _data = pd.read_csv(_filename, index_col=0)
+    return _data
+
+
+def init_subjects_df():
+    if os.path.exists('Data/subjects_df_out.csv'):
+        file = pd.read_csv('Data/subjects_df_out.csv', index_col=0)
+    else:
+        d = create_classes_df(CLASSES, SUBJECTS)
+        file = pd.DataFrame(d, index=CLASSES)
+    return file
+
+
+def init_profs_df():
+    if os.path.exists('Data/profs_df_out.csv'):
+        file = pd.read_csv('Data/profs_df_out.csv', index_col=0)
+        print('loaded file for profs')
+    else:
+        p = create_profs_df()
+        file = pd.DataFrame(p)
+    return file
+
 # initialisation
-d = create_classes_df(CLASSES, SUBJECTS)
-subjects_df = pd.DataFrame(d, index=CLASSES)
+subjects_df = init_subjects_df()
+profs_df = init_profs_df()
 
-p = create_profs_df()
-profs_df = pd.DataFrame(p)
 
-subject = initialize_assignment()
+
+L0100_PHILOSOPHIE = initialize_assignment()
+L0201_LETT_CLASS = initialize_assignment()
+L0202_LETT_MOD = initialize_assignment()
+L0421_ALLEMAND = initialize_assignment()
+L0422_ANGLAIS = initialize_assignment()
+L0426_ESPAGNOL = initialize_assignment()
+L0449_CREOLE = initialize_assignment()
+L0433_PORTUGAIS = initialize_assignment()
+L1000_HIT_GEO = initialize_assignment()
+L1100_SC_ECO_SOC = initialize_assignment()
+L1300_MATH = initialize_assignment()
+L1500_PHYS_CHIM = initialize_assignment()
+NSI = initialize_assignment()
+L1600_SVT = initialize_assignment()
+L1800_ARTS_PLASTIQUES = initialize_assignment()
+L6500_ENS_ART_ARTS_APP = initialize_assignment()
+L7100_BIOC_GENIE_BIOL = initialize_assignment()
+L7300_SC_TECH_MEDICO = initialize_assignment()
+L8012_ECO_GEST_COMP_FIN = initialize_assignment()
+L8013_ECO_GEST_CM = initialize_assignment()
+L8014_COMMUNICATION = initialize_assignment()
 
 # dummy manipulation
 
@@ -76,7 +123,8 @@ change_classes_per_subject('2GT2', 'L0100_PHILOSOPHIE', 3)
 add_new_prof('Jean', 10, 3, 'L0100_PHILOSOPHIE')
 
 # assign a prof to a class
-add_prof_to_subject(subject, 'Jean')
-assign_hour(subject, '2GT2', 'Jean', 4)
+add_prof_to_subject(L0100_PHILOSOPHIE, 'Jean')
+assign_hour(L0100_PHILOSOPHIE, '2GT2', 'Jean', 3)
 
-print(subject)
+
+# save_to_csv(profs_df, 'Data/profs_df_out.csv')
