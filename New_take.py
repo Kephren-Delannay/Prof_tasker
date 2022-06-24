@@ -20,13 +20,13 @@ SUBJECTS = ['L0100_PHILOSOPHIE', 'L0201_LETT CLASS', 'L0202_LETT MOD', 'L0421_AL
 def create_classes_df(_classes, _subjects):
     _data = {}
     for element in _subjects:
-        _data[element] = [0 for i in range(len(_classes))]
+        _data[element] = [0.0 for i in range(len(_classes))]
     return _data
 
 
 def change_classes_per_subject(_classe, _subject, value):
-    global subjects_df
-    subjects_df.at[_classe, _subject] = value
+    global SUBJECTS_DF
+    SUBJECTS_DF.at[_classe, _subject] = value
 
 
 def create_profs_df():
@@ -35,8 +35,8 @@ def create_profs_df():
 
 
 def add_new_prof( name, hours, sup, _subject):
-    global profs_df
-    profs_df.loc[name] = [hours, 0, sup, _subject]
+    global PROFS_DF
+    PROFS_DF.loc[name] = [hours, 0.0, sup, _subject]
 
 
 def initialize_assignment():
@@ -50,17 +50,18 @@ def initialize_assignment():
 
 def add_prof_to_subject(_subject, prof):
     global CLASSES
-    _subject.loc[prof] = [0 for x in range(len(CLASSES))]
+    _subject.loc[prof] = [0.0 for x in range(len(CLASSES))]
 
 
 def assign_hour(_subject, classe, prof, hours):
-    global profs_df
+    global PROFS_DF
     _subject.at[prof, classe] = hours
-    profs_df.at[prof, 'Assigned_Hours'] += hours
+    PROFS_DF.at[prof, 'Assigned_Hours'] += hours
 
 
 def save_to_csv(_data, _filename):
     _data.to_csv(_filename, index=True)
+    print('successfully saved to ' + _filename)
 
 
 def load_from_csv(_filename):
@@ -86,10 +87,10 @@ def init_profs_df():
         file = pd.DataFrame(p)
     return file
 
-# initialisation
-subjects_df = init_subjects_df()
-profs_df = init_profs_df()
 
+# initialisation
+SUBJECTS_DF = init_subjects_df()
+PROFS_DF = init_profs_df()
 
 
 L0100_PHILOSOPHIE = initialize_assignment()
@@ -117,14 +118,21 @@ L8014_COMMUNICATION = initialize_assignment()
 # dummy manipulation
 
 # affect a class to a subject
-change_classes_per_subject('2GT2', 'L0100_PHILOSOPHIE', 3)
-
-# create a new prof
-add_new_prof('Jean', 10, 3, 'L0100_PHILOSOPHIE')
-
-# assign a prof to a class
-add_prof_to_subject(L0100_PHILOSOPHIE, 'Jean')
-assign_hour(L0100_PHILOSOPHIE, '2GT2', 'Jean', 3)
-
+# change_classes_per_subject('2GT2', 'L0100_PHILOSOPHIE', 3)
+#
+# # create a new prof
+# add_new_prof('Jean', 10, 3, 'L0100_PHILOSOPHIE')
+#
+# # assign a prof to a class
+# add_prof_to_subject(L0100_PHILOSOPHIE, 'Jean')
+# assign_hour(L0100_PHILOSOPHIE, '2GT2', 'Jean', 3)
+#
 
 # save_to_csv(profs_df, 'Data/profs_df_out.csv')
+
+# print(SUBJECTS_DF)
+# SUBJECTS_DF.iloc[0, 20] = 1
+# print(L0421_ALLEMAND)
+# print(SUBJECTS_DF.iloc[0])
+# print(PROFS_DF)
+# print(SUBJECTS_DF['L0100_PHILOSOPHIE'])
