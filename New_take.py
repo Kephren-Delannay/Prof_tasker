@@ -88,6 +88,12 @@ def init_profs_df():
     return file
 
 
+def override_profs_df():
+    global PROFS_DF
+    p = create_profs_df()
+    PROFS_DF = pd.DataFrame(p)
+
+
 # initialisation
 SUBJECTS_DF = init_subjects_df()
 PROFS_DF = init_profs_df()
@@ -121,7 +127,7 @@ L8014_COMMUNICATION = initialize_assignment()
 # change_classes_per_subject('2GT2', 'L0100_PHILOSOPHIE', 3)
 #
 # # create a new prof
-# add_new_prof('Jean', 10, 3, 'L0100_PHILOSOPHIE')
+add_new_prof('Jean', 10, 3, 'L0100_PHILOSOPHIE')
 #
 # # assign a prof to a class
 # add_prof_to_subject(L0100_PHILOSOPHIE, 'Jean')
@@ -134,5 +140,4 @@ L8014_COMMUNICATION = initialize_assignment()
 # SUBJECTS_DF.iloc[0, 20] = 1
 # print(L0421_ALLEMAND)
 # print(SUBJECTS_DF.iloc[0])
-# print(PROFS_DF)
 # print(SUBJECTS_DF['L0100_PHILOSOPHIE'])

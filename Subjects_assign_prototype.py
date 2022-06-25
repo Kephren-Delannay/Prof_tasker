@@ -16,7 +16,6 @@ class Ui_MainWindow(object):
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(len(New_take.SUBJECTS))
 
-
         self.init_table()
 
         self.verticalLayout.addWidget(self.tableWidget)
