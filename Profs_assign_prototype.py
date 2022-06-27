@@ -121,14 +121,14 @@ class Ui_MainWindow(object):
             subject_item = self.Profs_tableWidget.cellWidget(i, 4)
             if name_item and name_item.text() != "" and hours_item and hours_item.text() != "" and sup_item and sup_item.text() != "":
                 try:
-                    eval(hours_item.text())
-                    eval(sup_item.text())
+                    float(hours_item.text())
+                    float(sup_item.text())
                 except Exception :
                     print('Could not convert to float')
                 else:
                     New_take.add_new_prof(name_item.text(),
-                                          eval(hours_item.text()),
-                                          eval(sup_item.text()),
+                                          float(hours_item.text()),
+                                          float(sup_item.text()),
                                           subject_item.currentText())
 
                     # New_take.add_prof_to_subject(subject_item.currentText(), name_item.text())

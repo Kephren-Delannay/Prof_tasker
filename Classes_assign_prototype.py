@@ -91,20 +91,25 @@ class Ui_MainWindow(object):
 
     def update_values(self):
         item = self.tableWidget.currentItem()
-        if item and item.row() > 0:
-            # self.tableWidget.item(0,0).setText('hello')
-            print(item.row())
-            print(item.text())
-            # value = eval(item.text())
-            # col = self.tableWidget.currentColumn()
-            # classe = self.tableWidget.horizontalHeaderItem(col).text()
-            # subject = self.Subject_comboBox.currentText()
-            # # total = New_take.SUBJECTS_DF[subject][classe]
-            # total = eval(self.tableWidget.item(0, col).text())
-            # new_val = str(total - value)
-            # # print(new_val)
-            # self.tableWidget.item(0,0).setText(new_val)
-            # # self.tableWidget.setItem(0, col, QtWidgets.QTableWidgetItem('0'))
+        if item:
+            try:
+                value = float(item.text())
+            except ValueError:
+                print('error')
+                value = 0.0
+            finally:
+                classe = self.tableWidget.horizontalHeaderItem(item.column()).text()
+                subject = self.Subject_comboBox.currentText()
+                total = New_take.SUBJECTS_DF[subject][classe]
+                s = []
+                for i in range(1, self.tableWidget.rowCount()):
+                    s.append(float(self.tableWidget.item(i, item.column()).text()))
+                new_val = float("{:.2f}".format(total - sum(s)))
+
+
+                self.tableWidget.item(0,item.column()).setText(str(new_val))
+                item.setText(str(value))
+
 
 
 if __name__ == "__main__":
