@@ -118,7 +118,7 @@ class Ui_MainWindow(object):
             name_item = self.Profs_tableWidget.item(i, 0)
             hours_item = self.Profs_tableWidget.item(i, 1)
             sup_item = self.Profs_tableWidget.item(i, 3)
-            subject_item = self.Profs_tableWidget.item(i, 4)
+            subject_item = self.Profs_tableWidget.cellWidget(i, 4)
             if name_item and name_item.text() != "" and hours_item and hours_item.text() != "" and sup_item and sup_item.text() != "":
                 try:
                     eval(hours_item.text())
@@ -129,7 +129,9 @@ class Ui_MainWindow(object):
                     New_take.add_new_prof(name_item.text(),
                                           eval(hours_item.text()),
                                           eval(sup_item.text()),
-                                          self.Profs_tableWidget.cellWidget(i, 4).currentText())
+                                          subject_item.currentText())
+                    New_take.save_all_subjects()
+                    # New_take.add_prof_to_subject(subject_item.currentText(), name_item.text())
             else:
                 print('Something went wrong...')
 
