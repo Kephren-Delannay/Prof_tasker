@@ -78,15 +78,15 @@ class Ui_MainWindow(object):
             self.tableWidget.item(0, i).setFlags(QtCore.Qt.ItemIsEnabled)
             self.tableWidget.item(0, i).setBackground(QtGui.QColor(249, 96, 135))
 
-        _subject = New_take.match_names(subject)
-        profs = list(_subject.index)
-        self.tableWidget.setRowCount(1 + len(profs))
-        for i in range(len(profs)):
-            self.tableWidget.setVerticalHeaderItem(i+1, QtWidgets.QTableWidgetItem(profs[i]))
-
-        for i in range(len(profs)):
-            for j in range(num_of_col):
-                self.tableWidget.setItem(i+1, j, QtWidgets.QTableWidgetItem(str(_subject.iloc[i,j])))
+        # _subject = New_take.match_names(subject)
+        # profs = list(_subject.index)
+        # self.tableWidget.setRowCount(1 + len(profs))
+        # for i in range(len(profs)):
+        #     self.tableWidget.setVerticalHeaderItem(i+1, QtWidgets.QTableWidgetItem(profs[i]))
+        #
+        # for i in range(len(profs)):
+        #     for j in range(num_of_col):
+        #         self.tableWidget.setItem(i+1, j, QtWidgets.QTableWidgetItem(str(_subject.iloc[i,j])))
 
 
 if __name__ == "__main__":

@@ -37,32 +37,54 @@ def create_profs_df():
 def add_new_prof(name, hours, sup, _subject):
     global PROFS_DF
     PROFS_DF.loc[name] = [hours, 0.0, sup, _subject]
-    s = match_names(str(_subject))
-    add_prof_to_subject(s, name)
+    # s = match_names(str(_subject))
+    add_prof_to_subject(_subject, name)
 
 
-def initialize_assignment(_name):
-    global CLASSES, subjects
-    _file = 'Data/{}_out.csv'.format(str(_name))
+# def initialize_assignment(_name):
+#     global CLASSES, subjects
+#     _file = 'Data/{}_out.csv'.format(str(_name))
+#
+#     if os.path.exists(_file):
+#         file = pd.read_csv(_file, index_col=0)
+#
+#     else:
+#         _data = {}
+#
+#         for classe in CLASSES:
+#             _data[classe] = []
+#         file = pd.DataFrame(_data)
+#
+#     subjects[_name] = file
+#     return file
 
-    if os.path.exists(_file):
-        file = pd.read_csv(_file, index_col=0)
 
-    else:
-        _data = {}
+def init_assignments():
+    t = []
+    for i in list(PROFS_DF.index):
+        _t = (PROFS_DF.loc[i, 'Subject'], i)
+        t.append(_t)
 
-        for classe in CLASSES:
-            _data[classe] = []
-        file = pd.DataFrame(_data)
-        subjects[_name] = file
+    multi = pd.MultiIndex.from_tuples(t)
 
-    return file
-
+    _data = {}
+    for cl in CLASSES:
+        _data[cl] = [0.0 for i in range(len(list(PROFS_DF.index)))]
+    assignments = pd.DataFrame(_data, index=multi)
+    return assignments
 
 
 def add_prof_to_subject(_subject, prof):
-    global CLASSES
-    _subject.loc[prof] = [0.0 for x in range(len(CLASSES))]
+    global CLASSES, ASSIGNMENTS
+    # _subject.loc[prof] = [0.0 for x in range(len(CLASSES))]
+    ASSIGNMENTS.loc[(_subject, prof), :] = [0.0 for i in range(50)]
+    ASSIGNMENTS = ASSIGNMENTS.sort_index()
+
+
+def remove_prof(_subject, _prof):
+    global ASSIGNMENTS
+    ASSIGNMENTS = ASSIGNMENTS.drop((_subject, _prof))
+
 
 
 def assign_hour(_subject, classe, prof, hours):
@@ -108,30 +130,11 @@ def override_profs_df():
 # initialisation
 SUBJECTS_DF = init_subjects_df()
 PROFS_DF = init_profs_df()
+ASSIGNMENTS = init_assignments()
+
+# print(SUBJECTS_DF)
 
 
-subjects = {}
-L0100_PHILOSOPHIE = initialize_assignment('L0100_PHILOSOPHIE')
-L0201_LETT_CLASS = initialize_assignment('L0201_LETT_CLASS')
-L0202_LETT_MOD = initialize_assignment('L0202_LETT_MOD')
-L0421_ALLEMAND = initialize_assignment('L0421_ALLEMAND')
-L0422_ANGLAIS = initialize_assignment('L0422_ANGLAIS')
-L0426_ESPAGNOL = initialize_assignment('L0426_ESPAGNOL')
-L0449_CREOLE = initialize_assignment('L0449_CREOLE')
-L0433_PORTUGAIS = initialize_assignment('L0433_PORTUGAIS')
-L1000_HIT_GEO = initialize_assignment('L1000_HIT_GEO')
-L1100_SC_ECO_SOC = initialize_assignment('L1100_SC_ECO_SOC')
-L1300_MATH = initialize_assignment('L1300_MATH')
-L1500_PHYS_CHIM = initialize_assignment('L1500_PHYS_CHIM')
-NSI = initialize_assignment('NSI')
-L1600_SVT = initialize_assignment('L1600_SVT')
-L1800_ARTS_PLASTIQUES = initialize_assignment('L1800_ARTS_PLASTIQUES')
-L6500_ENS_ART_ARTS_APP = initialize_assignment('L6500_ENS_ART_ARTS_APP')
-L7100_BIOC_GENIE_BIOL = initialize_assignment('L7100_BIOC_GENIE_BIOL')
-L7300_SC_TECH_MEDICO = initialize_assignment('L7300_SC_TECH_MEDICO')
-L8012_ECO_GEST_COMP_FIN = initialize_assignment('L8012_ECO_GEST_COMP_FIN')
-L8013_ECO_GEST_CM = initialize_assignment('L8013_ECO_GEST_CM')
-L8014_COMMUNICATION = initialize_assignment('L8014_COMMUNICATION')
 
 
 def match_names(_subject_name):
@@ -183,10 +186,12 @@ def match_names(_subject_name):
         return L8014_COMMUNICATION
 
 
-def save_all_subjects():
-    global subjects
-    for element in subjects:
-        save_to_csv(subjects[element], 'Data/{}_out.csv'.format(str(element)))
+# def save_all_subjects():
+#     global subjects
+#     print('attempt to save')
+#     print(subjects)
+#     for element in subjects:
+#         save_to_csv(subjects[element], 'Data/{}_out.csv'.format(str(element)))
 
 
 
@@ -219,6 +224,10 @@ def save_all_subjects():
 # add_new_prof('Jean',10,0,'NSI')
 
 
+# a = match_names('L0201_LETT_CLASS').drop('Test')
+# L0201_LETT_CLASS = a
+# print(L0201_LETT_CLASS)
+
 # print(NSI.head())
 # a = {'NSI' : L0201_LETT_CLASS}
 # keys = [k for k, v in subjects.items() if v is L0201_LETT_CLASS]
@@ -229,3 +238,19 @@ def save_all_subjects():
 # for element in subjects:
 #     print(subjects[element])
 # save_all_subjects()
+
+
+
+
+# t = []
+# for i in list(PROFS_DF.index):
+#     _t = (PROFS_DF.loc[i, 'Subject'], i)
+#     t.append(_t)
+#
+# multi = pd.MultiIndex.from_tuples(t)
+#
+# _data = {}
+# for cl in CLASSES:
+#     _data[cl] = [0 for i in range(len(list(PROFS_DF.index)))]
+# assignments = pd.DataFrame(_data, index=multi)
+# print(assignments.loc['L0100_PHILOSOPHIE'])
