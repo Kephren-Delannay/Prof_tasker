@@ -133,8 +133,8 @@ PROFS_DF = init_profs_df()
 ASSIGNMENTS = init_assignments()
 
 # print(SUBJECTS_DF)
-
-
+# print(ASSIGNMENTS.loc[('L0100_PHILOSOPHIE', 'M. BERTAUD')].iloc[0])
+# print(SUBJECTS_DF['L0100_PHILOSOPHIE']['2GT1'])
 
 
 def match_names(_subject_name):

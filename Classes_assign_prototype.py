@@ -35,8 +35,8 @@ class Ui_MainWindow(object):
         self.tableWidget.setRowCount(1)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(0, item)
-        # item = QtWidgets.QTableWidgetItem()
-        # self.tableWidget.setVerticalHeaderItem(1, item)
+        self.tableWidget.itemChanged.connect(self.update_values)
+
         self.horizontalLayout.addWidget(self.tableWidget)
         self.horizontalLayout.setStretch(0, 1)
         self.horizontalLayout.setStretch(1, 4)
@@ -78,15 +78,33 @@ class Ui_MainWindow(object):
             self.tableWidget.item(0, i).setFlags(QtCore.Qt.ItemIsEnabled)
             self.tableWidget.item(0, i).setBackground(QtGui.QColor(249, 96, 135))
 
-        # _subject = New_take.match_names(subject)
-        # profs = list(_subject.index)
-        # self.tableWidget.setRowCount(1 + len(profs))
-        # for i in range(len(profs)):
-        #     self.tableWidget.setVerticalHeaderItem(i+1, QtWidgets.QTableWidgetItem(profs[i]))
-        #
-        # for i in range(len(profs)):
-        #     for j in range(num_of_col):
-        #         self.tableWidget.setItem(i+1, j, QtWidgets.QTableWidgetItem(str(_subject.iloc[i,j])))
+        profs = New_take.PROFS_DF.where(New_take.PROFS_DF['Subject'] == subject).dropna()
+        num_of_rows = 1 + len(list(profs.index))
+        self.tableWidget.setRowCount(num_of_rows)
+        for i in range(len(list(profs.index))):
+            self.tableWidget.setVerticalHeaderItem(i+1, QtWidgets.QTableWidgetItem(list(profs.index)[i]))
+
+        for i in range(num_of_col):
+            for j in range(1, num_of_rows):
+                value = New_take.ASSIGNMENTS.loc[(subject, list(profs.index)[j-1])].iloc[i]
+                self.tableWidget.setItem(j, i, QtWidgets.QTableWidgetItem(str(value)))
+
+    def update_values(self):
+        item = self.tableWidget.currentItem()
+        if item and item.row() > 0:
+            # self.tableWidget.item(0,0).setText('hello')
+            print(item.row())
+            print(item.text())
+            # value = eval(item.text())
+            # col = self.tableWidget.currentColumn()
+            # classe = self.tableWidget.horizontalHeaderItem(col).text()
+            # subject = self.Subject_comboBox.currentText()
+            # # total = New_take.SUBJECTS_DF[subject][classe]
+            # total = eval(self.tableWidget.item(0, col).text())
+            # new_val = str(total - value)
+            # # print(new_val)
+            # self.tableWidget.item(0,0).setText(new_val)
+            # # self.tableWidget.setItem(0, col, QtWidgets.QTableWidgetItem('0'))
 
 
 if __name__ == "__main__":
