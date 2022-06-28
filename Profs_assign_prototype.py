@@ -131,13 +131,10 @@ class Ui_MainWindow(object):
                                           float(sup_item.text()),
                                           subject_item.currentText())
 
-                    # New_take.add_prof_to_subject(subject_item.currentText(), name_item.text())
             else:
                 print('Something went wrong...')
 
-        print(New_take.ASSIGNMENTS)
         New_take.save_to_csv(New_take.PROFS_DF, 'Data/Profs_df_out.csv')
-        # New_take.save_all_subjects()
 
     def delete(self, row):
         subject = self.Profs_tableWidget.cellWidget(row, 4).currentText()

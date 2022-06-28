@@ -104,6 +104,7 @@ def init_subjects_df():
 def init_profs_df():
     if os.path.exists('Data/profs_df_out.csv'):
         file = pd.read_csv('Data/profs_df_out.csv', index_col=0)
+        print('loaded for profs')
     else:
         p = create_profs_df()
         file = pd.DataFrame(p)
@@ -115,88 +116,15 @@ def override_profs_df():
     p = create_profs_df()
     PROFS_DF = pd.DataFrame(p)
 
+def set_hour(prof, amount):
+    global PROFS_DF
+    v = list(PROFS_DF.loc[prof])
+    v[1] = amount
+    PROFS_DF.loc[prof] = v
 
 # initialisation
 SUBJECTS_DF = init_subjects_df()
 PROFS_DF = init_profs_df()
 ASSIGNMENTS = init_assignments()
 
-
-# ASSIGNMENTS.to_csv('Data/Assignments_out_test.csv', index=True)
-
-# test = pd.read_csv('Data/Assignments_out_test.csv', index_col=[0,1])
-# print(test)
-# print(SUBJECTS_DF)
-# print(ASSIGNMENTS.loc[('L0100_PHILOSOPHIE', 'M. BERTAUD')].iloc[0])
-# print(SUBJECTS_DF['L0100_PHILOSOPHIE']['2GT1'])
-
-
-
-# def save_all_subjects():
-#     global subjects
-#     print('attempt to save')
-#     print(subjects)
-#     for element in subjects:
-#         save_to_csv(subjects[element], 'Data/{}_out.csv'.format(str(element)))
-
-
-# print(ASSIGNMENTS.loc[('L0100_PHILOSOPHIE', 'M. BERTAUD')])
-
-
-# dummy manipulation
-
-# affect a class to a subject
-# change_classes_per_subject('2GT2', 'L0100_PHILOSOPHIE', 3)
-#
-# # create a new prof
-# add_new_prof('Jean', 10, 3, 'L0100_PHILOSOPHIE')
-#
-# # assign a prof to a class
-# add_prof_to_subject(L0100_PHILOSOPHIE, 'Jean')
-# assign_hour(L0100_PHILOSOPHIE, '2GT2', 'Jean', 3)
-#
-
-# save_to_csv(profs_df, 'Data/profs_df_out.csv')
-
-# print(SUBJECTS_DF)
-# SUBJECTS_DF.iloc[0, 20] = 1
-# print(L0421_ALLEMAND)
-# print(SUBJECTS_DF.iloc[0])
-# print(SUBJECTS_DF['L0100_PHILOSOPHIE'].where(SUBJECTS_DF['L0100_PHILOSOPHIE'] > 0).dropna())
-# print(SUBJECTS_DF['L0100_PHILOSOPHIE'].iloc[0])
-# print(PROFS_DF.where(PROFS_DF['Subject'] == 'L0100_PHILOSOPHIE'))
-# print(L0100_PHILOSOPHIE.at['Jean', '2GT1'])
-# print(L0100_PHILOSOPHIE.iloc[0,0])
-
-# add_new_prof('Jean',10,0,'NSI')
-
-
-# a = match_names('L0201_LETT_CLASS').drop('Test')
-# L0201_LETT_CLASS = a
-# print(L0201_LETT_CLASS)
-
-# print(NSI.head())
-# a = {'NSI' : L0201_LETT_CLASS}
-# keys = [k for k, v in subjects.items() if v is L0201_LETT_CLASS]
-# print(keys)
-# for k, v in a.items():
-#     print(k)
-# print(subjects)
-# for element in subjects:
-#     print(subjects[element])
-# save_all_subjects()
-# print(ASSIGNMENTS.iloc[0][1])
-# print(ASSIGNMENTS)
-# print(ASSIGNMENTS.loc[('L0100_PHILOSOPHIE', 'M. BEDMINSTER')].loc['2GT1'])
-# t = []
-# for i in list(PROFS_DF.index):
-#     _t = (PROFS_DF.loc[i, 'Subject'], i)
-#     t.append(_t)
-#
-# multi = pd.MultiIndex.from_tuples(t)
-#
-# _data = {}
-# for cl in CLASSES:
-#     _data[cl] = [0 for i in range(len(list(PROFS_DF.index)))]
-# assignments = pd.DataFrame(_data, index=multi)
-# print(assignments.loc['L0100_PHILOSOPHIE'])
+print(PROFS_DF)

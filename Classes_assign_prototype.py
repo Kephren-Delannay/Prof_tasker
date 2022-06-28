@@ -122,13 +122,18 @@ class Ui_MainWindow(object):
 
         for i in range(1, self.tableWidget.rowCount()):
             prof = self.tableWidget.verticalHeaderItem(i).text()
+            total = 0
             for j in range(self.tableWidget.columnCount()):
                 classe = self.tableWidget.horizontalHeaderItem(j).text()
-                # print(classe)
-                New_take.ASSIGNMENTS.loc[(subject, prof)][classe] = float(self.tableWidget.item(i, j).text())
+                value = float(self.tableWidget.item(i, j).text())
+                New_take.ASSIGNMENTS.loc[(subject, prof)][classe] = value
+                total += value
+            New_take.set_hour(prof, total)
+
 
         try:
             New_take.save_to_csv(New_take.ASSIGNMENTS, 'Data/Assignments_out.csv')
+            New_take.save_to_csv(New_take.PROFS_DF, 'Data/Profs_df_out.csv')
             print('data was saved')
         except Exception:
             print('something went wrong')
