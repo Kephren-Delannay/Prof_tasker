@@ -41,36 +41,25 @@ def add_new_prof(name, hours, sup, _subject):
     add_prof_to_subject(_subject, name)
 
 
-# def initialize_assignment(_name):
-#     global CLASSES, subjects
-#     _file = 'Data/{}_out.csv'.format(str(_name))
-#
-#     if os.path.exists(_file):
-#         file = pd.read_csv(_file, index_col=0)
-#
-#     else:
-#         _data = {}
-#
-#         for classe in CLASSES:
-#             _data[classe] = []
-#         file = pd.DataFrame(_data)
-#
-#     subjects[_name] = file
-#     return file
-
-
 def init_assignments():
-    t = []
-    for i in list(PROFS_DF.index):
-        _t = (PROFS_DF.loc[i, 'Subject'], i)
-        t.append(_t)
+    if os.path.exists('Data/Assignments_out.csv'):
+        assignments = pd.read_csv('Data/Assignments_out.csv', index_col=[0,1])
+        print('Loaded file for assignments')
+        # print(assignments)
+    else:
+        print('init Assignments')
+        t = []
+        for i in list(PROFS_DF.index):
+            _t = (PROFS_DF.loc[i, 'Subject'], i)
+            t.append(_t)
 
-    multi = pd.MultiIndex.from_tuples(t)
+        multi = pd.MultiIndex.from_tuples(t)
 
-    _data = {}
-    for cl in CLASSES:
-        _data[cl] = [0.0 for i in range(len(list(PROFS_DF.index)))]
-    assignments = pd.DataFrame(_data, index=multi)
+        _data = {}
+        for cl in CLASSES:
+            _data[cl] = [0.0 for i in range(len(list(PROFS_DF.index)))]
+        assignments = pd.DataFrame(_data, index=multi)
+
     return assignments
 
 
@@ -132,58 +121,15 @@ SUBJECTS_DF = init_subjects_df()
 PROFS_DF = init_profs_df()
 ASSIGNMENTS = init_assignments()
 
+
+# ASSIGNMENTS.to_csv('Data/Assignments_out_test.csv', index=True)
+
+# test = pd.read_csv('Data/Assignments_out_test.csv', index_col=[0,1])
+# print(test)
 # print(SUBJECTS_DF)
 # print(ASSIGNMENTS.loc[('L0100_PHILOSOPHIE', 'M. BERTAUD')].iloc[0])
 # print(SUBJECTS_DF['L0100_PHILOSOPHIE']['2GT1'])
 
-
-def match_names(_subject_name):
-    global L0100_PHILOSOPHIE, L0201_LETT_CLASS, L0202_LETT_MOD, L0421_ALLEMAND, L0422_ANGLAIS, L0426_ESPAGNOL, L0449_CREOLE
-    global L0433_PORTUGAIS, L1000_HIT_GEO, L1100_SC_ECO_SOC, L1300_MATH, L1500_PHYS_CHIM, NSI, L1600_SVT, L1800_ARTS_PLASTIQUES
-    global L6500_ENS_ART_ARTS_APP, L7100_BIOC_GENIE_BIOL, L7300_SC_TECH_MEDICO, L8012_ECO_GEST_COMP_FIN, L8013_ECO_GEST_CM, L8014_COMMUNICATION
-
-    if(_subject_name == 'L0100_PHILOSOPHIE'):
-        return L0100_PHILOSOPHIE
-    elif(_subject_name == 'L0201_LETT_CLASS'):
-        return L0201_LETT_CLASS
-    elif (_subject_name == 'L0202_LETT_MOD'):
-        return L0202_LETT_MOD
-    elif (_subject_name == 'L0421_ALLEMAND'):
-        return L0421_ALLEMAND
-    elif (_subject_name == 'L0422_ANGLAIS'):
-        return L0422_ANGLAIS
-    elif (_subject_name == 'L0426_ESPAGNOL'):
-        return L0426_ESPAGNOL
-    elif (_subject_name == 'L0449_CREOLE'):
-        return L0449_CREOLE
-    elif (_subject_name == 'L0433_PORTUGAIS'):
-        return L0433_PORTUGAIS
-    elif (_subject_name == 'L1000_HIT_GEO'):
-        return L1000_HIT_GEO
-    elif (_subject_name == 'L1100_SC_ECO_SOC'):
-        return L1100_SC_ECO_SOC
-    elif (_subject_name == 'L1300_MATH'):
-        return L1300_MATH
-    elif (_subject_name == 'L1500_PHYS_CHIM'):
-        return L1500_PHYS_CHIM
-    elif (_subject_name == 'NSI'):
-        return NSI
-    elif (_subject_name == 'L1600_SVT'):
-        return L1600_SVT
-    elif (_subject_name == 'L1800_ARTS_PLASTIQUES'):
-        return L1800_ARTS_PLASTIQUES
-    elif (_subject_name == 'L6500_ENS_ART_ARTS_APP'):
-        return L6500_ENS_ART_ARTS_APP
-    elif (_subject_name == 'L7100_BIOC_GENIE_BIOL'):
-        return L7100_BIOC_GENIE_BIOL
-    elif (_subject_name == 'L7300_SC_TECH_MEDICO'):
-        return L7300_SC_TECH_MEDICO
-    elif (_subject_name == 'L8012_ECO_GEST_COMP_FIN'):
-        return L8012_ECO_GEST_COMP_FIN
-    elif (_subject_name == 'L8013_ECO_GEST_CM'):
-        return L8013_ECO_GEST_CM
-    elif (_subject_name == 'L8014_COMMUNICATION'):
-        return L8014_COMMUNICATION
 
 
 # def save_all_subjects():
@@ -194,6 +140,7 @@ def match_names(_subject_name):
 #         save_to_csv(subjects[element], 'Data/{}_out.csv'.format(str(element)))
 
 
+# print(ASSIGNMENTS.loc[('L0100_PHILOSOPHIE', 'M. BERTAUD')])
 
 
 # dummy manipulation
@@ -238,10 +185,9 @@ def match_names(_subject_name):
 # for element in subjects:
 #     print(subjects[element])
 # save_all_subjects()
-
-
-
-
+# print(ASSIGNMENTS.iloc[0][1])
+# print(ASSIGNMENTS)
+# print(ASSIGNMENTS.loc[('L0100_PHILOSOPHIE', 'M. BEDMINSTER')].loc['2GT1'])
 # t = []
 # for i in list(PROFS_DF.index):
 #     _t = (PROFS_DF.loc[i, 'Subject'], i)

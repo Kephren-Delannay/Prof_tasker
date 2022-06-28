@@ -23,6 +23,7 @@ class Ui_MainWindow(object):
 
         self.Save_pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.Save_pushButton.setObjectName("Save_pushButton")
+        self.Save_pushButton.clicked.connect(self.save)
         self.verticalLayout_2.addWidget(self.Save_pushButton)
 
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -63,6 +64,7 @@ class Ui_MainWindow(object):
         # item.setText(_translate("MainWindow", "Total"))
 
     def populate_table(self, subject):
+
         for i in range(2, self.tableWidget.rowCount()):
             self.tableWidget.removeRow(i)
         for i in range(1, self.tableWidget.columnCount()):
@@ -73,10 +75,14 @@ class Ui_MainWindow(object):
 
         self.tableWidget.setColumnCount(num_of_col)
         for i in range(num_of_col):
-            self.tableWidget.setHorizontalHeaderItem(i, QtWidgets.QTableWidgetItem(serie.keys()[i]))
-            self.tableWidget.setItem(0, i, QtWidgets.QTableWidgetItem(str(serie.iloc[i])))
+            classe = serie.keys()[i]
+            value = New_take.ASSIGNMENTS[classe].loc[subject].sum()
+
+            self.tableWidget.setHorizontalHeaderItem(i, QtWidgets.QTableWidgetItem(classe))
+            self.tableWidget.setItem(0, i, QtWidgets.QTableWidgetItem(str(serie.iloc[i] - value)))
             self.tableWidget.item(0, i).setFlags(QtCore.Qt.ItemIsEnabled)
             self.tableWidget.item(0, i).setBackground(QtGui.QColor(249, 96, 135))
+
 
         profs = New_take.PROFS_DF.where(New_take.PROFS_DF['Subject'] == subject).dropna()
         num_of_rows = 1 + len(list(profs.index))
@@ -86,7 +92,8 @@ class Ui_MainWindow(object):
 
         for i in range(num_of_col):
             for j in range(1, num_of_rows):
-                value = New_take.ASSIGNMENTS.loc[(subject, list(profs.index)[j-1])].iloc[i]
+                classe = self.tableWidget.horizontalHeaderItem(i).text()
+                value = New_take.ASSIGNMENTS.loc[(subject, list(profs.index)[j-1])].loc[classe]
                 self.tableWidget.setItem(j, i, QtWidgets.QTableWidgetItem(str(value)))
 
     def update_values(self):
@@ -94,10 +101,6 @@ class Ui_MainWindow(object):
         if item:
             try:
                 value = float(item.text())
-            except ValueError:
-                print('error')
-                value = 0.0
-            finally:
                 classe = self.tableWidget.horizontalHeaderItem(item.column()).text()
                 subject = self.Subject_comboBox.currentText()
                 total = New_take.SUBJECTS_DF[subject][classe]
@@ -106,9 +109,29 @@ class Ui_MainWindow(object):
                     s.append(float(self.tableWidget.item(i, item.column()).text()))
                 new_val = float("{:.2f}".format(total - sum(s)))
 
+                self.tableWidget.item(0, item.column()).setText(str(new_val))
 
-                self.tableWidget.item(0,item.column()).setText(str(new_val))
+            except ValueError:
+                print('error')
+                value = 0.0
+            finally:
                 item.setText(str(value))
+
+    def save(self):
+        subject = self.Subject_comboBox.currentText()
+
+        for i in range(1, self.tableWidget.rowCount()):
+            prof = self.tableWidget.verticalHeaderItem(i).text()
+            for j in range(self.tableWidget.columnCount()):
+                classe = self.tableWidget.horizontalHeaderItem(j).text()
+                # print(classe)
+                New_take.ASSIGNMENTS.loc[(subject, prof)][classe] = float(self.tableWidget.item(i, j).text())
+
+        try:
+            New_take.save_to_csv(New_take.ASSIGNMENTS, 'Data/Assignments_out.csv')
+            print('data was saved')
+        except Exception:
+            print('something went wrong')
 
 
 
