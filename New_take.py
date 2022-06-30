@@ -4,7 +4,7 @@ import os.path
 # region CONST
 # classes
 CLASSES = ['2GT1', '2GT2', '2GT3', '2GT4', '2GT5', '2GT6', '2GT7', '2GT8', '2GT9', '2GT10', '2GT11', '2nd_Options', '2nd_Autres',
-           '1eGT1', '1eGT2', '1eGT3', '1eGT4', '1eGT5', '1eGT6', '1eGT7', '1eGT8', '1eGT9', '1ere_Spécialirés', '1ere_Autres', '1ere_ST2S', '1ere_STMG',
+           '1eGT1', '1eGT2', '1eGT3', '1eGT4', '1eGT5', '1eGT6', '1eGT7', '1eGT8', '1eGT9', '1ere_Spécialités', '1ere_Autres', '1ere_ST2S', '1ere_STMG',
            'TG1', 'TG2', 'TG3', 'TG4', 'TG5', 'TG6', 'TG7', 'TG8', 'Term_Spécialités', 'Term_Autres', 'TST2S', 'TSTMG',
            'BTS1_COM', 'BTS2_COM', 'BTS1_MCO', 'BTS2_MCO', 'BTS1_SAM', 'BTS2_SAM', 'BTS1_CG', 'BTS2_CG', 'ECG1', 'ECG2', 'AL1', 'AL2']
 
@@ -38,7 +38,7 @@ def add_new_prof(name, hours, sup, _subject):
     global PROFS_DF
     PROFS_DF.loc[name] = [hours, 0.0, sup, _subject]
     # s = match_names(str(_subject))
-    add_prof_to_subject(_subject, name)
+    # add_prof_to_subject(_subject, name)
 
 
 def init_assignments():
@@ -127,4 +127,4 @@ SUBJECTS_DF = init_subjects_df()
 PROFS_DF = init_profs_df()
 ASSIGNMENTS = init_assignments()
 
-print(PROFS_DF)
+# print(ASSIGNMENTS)

@@ -1,5 +1,5 @@
 
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtWidgets, QtGui
 import New_take
 
 class Ui_MainWindow(object):
@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(len(New_take.SUBJECTS))
-
+        self.tableWidget.setAlternatingRowColors(True)
         self.init_table()
 
         self.verticalLayout.addWidget(self.tableWidget)
@@ -25,6 +25,10 @@ class Ui_MainWindow(object):
         self.multiline_edit_pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.multiline_edit_pushButton.setObjectName("multiline_edit_pushButton")
         self.multiline_edit_pushButton.clicked.connect(self.multi_edit)
+
+        self.shortcut_close = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+E'), self.centralwidget)
+        self.shortcut_close.activated.connect(self.multi_edit)
+
         self.verticalLayout.addWidget(self.multiline_edit_pushButton)
 
         # region save button
