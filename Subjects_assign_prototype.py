@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setColumnCount(len(New_take.SUBJECTS))
         self.tableWidget.setAlternatingRowColors(True)
         self.init_table()
-
+        self.tableWidget.itemChanged.connect(self.update_values)
         self.verticalLayout.addWidget(self.tableWidget)
 
         # endregion
@@ -26,8 +26,11 @@ class Ui_MainWindow(object):
         self.multiline_edit_pushButton.setObjectName("multiline_edit_pushButton")
         self.multiline_edit_pushButton.clicked.connect(self.multi_edit)
 
-        self.shortcut_close = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+E'), self.centralwidget)
-        self.shortcut_close.activated.connect(self.multi_edit)
+        self.shortcut_edit = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+E'), self.centralwidget)
+        self.shortcut_edit.activated.connect(self.multi_edit)
+
+        self.shortcut_save = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+S'), self.centralwidget)
+        self.shortcut_save.activated.connect(self.save_button)
 
         self.verticalLayout.addWidget(self.multiline_edit_pushButton)
 
@@ -84,6 +87,19 @@ class Ui_MainWindow(object):
             for item in self.tableWidget.selectedItems():
                 item.setText(str(value))
 
+    def update_values(self):
+        item = self.tableWidget.currentItem()
+        if item:
+            try:
+                value = float(item.text())
+                self.tableWidget.item(0, item.column()).setText(str(value))
+
+            except ValueError:
+                print('error')
+                value = 0.0
+
+            finally:
+                item.setText(str(value))
 
 if __name__ == "__main__":
     import sys
