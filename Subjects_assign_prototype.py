@@ -92,7 +92,7 @@ class Ui_MainWindow(object):
         if item:
             try:
                 value = float(item.text())
-                self.tableWidget.item(0, item.column()).setText(str(value))
+                self.tableWidget.item(item.row(), item.column()).setText(str(value))
 
             except ValueError:
                 print('error')
