@@ -19,6 +19,7 @@ class Ui_MainWindow(object):
             self.Subject_comboBox.addItem(subject)
         self.Subject_comboBox.activated.connect(lambda : self.populate_table(self.Subject_comboBox.currentText()))
 
+
         self.verticalLayout_2.addWidget(self.Subject_comboBox)
 
         self.Save_pushButton = QtWidgets.QPushButton(self.centralwidget)
@@ -53,6 +54,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.populate_table(self.Subject_comboBox.currentText())
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -100,6 +103,8 @@ class Ui_MainWindow(object):
         item = self.tableWidget.currentItem()
         if item:
             try:
+                prof = self.tableWidget.verticalHeaderItem(item.row()).text()
+
                 value = float(item.text())
                 classe = self.tableWidget.horizontalHeaderItem(item.column()).text()
                 subject = self.Subject_comboBox.currentText()
@@ -116,6 +121,8 @@ class Ui_MainWindow(object):
                 value = 0.0
             finally:
                 item.setText(str(value))
+                New_take.set_hour(prof, value)
+                print(New_take.PROFS_DF.loc[prof])
 
     def save(self):
         subject = self.Subject_comboBox.currentText()

@@ -139,3 +139,4 @@ ASSIGNMENTS = init_assignments()
 # SUBJECTS_DF.loc['BTS2_MCO']['L8014_COMMUNICATION'] = 0.0
 #
 # save_to_csv(SUBJECTS_DF, 'Data/Subjects_df_out_b.csv')
+
